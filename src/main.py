@@ -3,26 +3,45 @@ class Member:
         self.name = name
         self.age = age
         self.sex = sex
-    
+        self.setPronomen()
+
+    def checkSex(self):
+        if self.sex == "male":
+            return"man"
+        elif self.sex == "female":
+            return "woman"
+        else:
+            return "unknown"
+        
+    def setPronomen(self):
+        if self.checkSex() == "man":
+            self.pronomen = "he"
+        elif self.checkSex() == "woman":
+            self.pronomen = "she"
+        else:
+            self.pronomen = "they"
+
     def prof(self):
-        print(f"{self.name} is {self.age} years old")
+        print(f"{self.name} is {self.age} years old and a {self.checkSex():}")
     
     def drinkAge(self):
-        adult = Member(self.name, self.age, self.sex)
-
-        if adult.age >= 20:
-            print(f"{self.name} can drink alcohole")
+        if self.age >= 20:
+            print(f"{self.pronomen} can drink alcohole")
         else:
-            print(f"{self.name} cannot drink alcohole")
+            print(f"{self.pronomen} cannot drink alcohole")
 
 def main():
     p1 = Member("Alice", 17, "female")
+    p1.setPronomen()
     p2 = Member("Bob", 45, "male")
+    p2.setPronomen()
+    p3 = Member("Num1", 33, "none")
+    p3.setPronomen()
     
-    p1.prof()
-    p1.drinkAge()
-    p2.prof()
-    p2.drinkAge()
+    for p in [p1, p2, p3]:
+        p.setPronomen()
+        p.prof()
+        p.drinkAge()
 
 if __name__ == "__main__":
     main()
